@@ -1,6 +1,6 @@
 import pygame as pg
 from constants import *
-
+from player import *
 
 
 def main(): 
@@ -18,6 +18,8 @@ def main():
             if event.type == pg.QUIT:
                 return
         screen.fill((0,0,0))
+        jit = Player((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2))
+        jit.draw(screen)
         dt = clock.tick(60) / 1000  
         pg.display.flip()
         
