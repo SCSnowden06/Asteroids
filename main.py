@@ -1,27 +1,31 @@
-import pygame as pg
+import pygame 
 from constants import *
 from player import *
 
 
 def main(): 
-    pg.init()
-    screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    clock = pg.time.Clock()
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock()
     dt = 0
 
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
-    while True:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
+    jit = Player((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2))
+
+    while True:                                                 
+        for event in pygame.event.get():                        #lets the exit button actually work
+            if event.type == pygame.QUIT:
                 return
-        screen.fill((0,0,0))
-        jit = Player((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2))
+        screen.fill((0,0,0))                                    #here and above are initializing game,   
+
+        jit.update(dt)                                          #game loop starts here
         jit.draw(screen)
         dt = clock.tick(60) / 1000  
-        pg.display.flip()
+
+        pygame.display.flip()                                   #update screen
         
 
     
