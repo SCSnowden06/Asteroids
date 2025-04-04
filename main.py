@@ -1,6 +1,8 @@
 import pygame 
 from constants import *
 from player import *
+from asteroids import *
+from asteroidfield import *
 
 
 def main(): 
@@ -12,9 +14,13 @@ def main():
 
     updateable = pygame.sprite.Group()                                  # Group initializations
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
     Player.containers = (drawable, updateable)
+    Asteroid.containers = (drawable, updateable, asteroids)
+    AsteroidField.containers = (updateable)
 
     jit = Player((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2))                   # Player initializations
+    asteroid_field = AsteroidField()
 
     while True:                                                 
         for event in pygame.event.get():                        #lets the exit button actually work
@@ -22,7 +28,9 @@ def main():
                 return
         screen.fill((0,0,0))                                    #here and above are initializing game,   
 
+
         updateable.update(dt)                                   #game loop starts here
+        asteroids.update(dt)
         for sprite in drawable:
             sprite.draw(screen)
          
