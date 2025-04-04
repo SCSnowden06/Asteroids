@@ -3,6 +3,8 @@ from constants import PLAYER_RADIUS, PLAYER_ROTATE_SPEED, PLAYER_MOVE_SPEED
 import pygame
 
 class Player(CircleShape):
+    
+
     def __init__(self, x, y):
         self.x = x
         self.y = y

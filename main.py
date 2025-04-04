@@ -9,9 +9,11 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
-    print("Starting Asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
+    
+
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (drawable, updateable)
 
     jit = Player((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2))
 
@@ -21,8 +23,9 @@ def main():
                 return
         screen.fill((0,0,0))                                    #here and above are initializing game,   
 
-        jit.update(dt)                                          #game loop starts here
-        jit.draw(screen)
+        updateable.update(dt)                                         #game loop starts here
+        for sprite in drawable:
+            sprite.draw(screen)
         dt = clock.tick(60) / 1000  
 
         pygame.display.flip()                                   #update screen
