@@ -23,7 +23,7 @@ def main():
     AsteroidField.containers = (updateable)
     Shot.containers = (drawable, updateable)
 
-    jit = Player((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2))                   # Player initializations
+    jit = Player((SCREEN_WIDTH/2), (SCREEN_HEIGHT/2), shots)                   # Player initializations
     asteroid_field = AsteroidField()
 
     while True:                                                 
@@ -41,6 +41,12 @@ def main():
             if(CircleShape.is_colliding(asteroid, jit)):
                 print("GAME OVER")
                 sys.exit(0)
+        for asteroid in asteroids:
+            for shot in shots:
+                if(CircleShape.is_colliding(shot, asteroid)):
+                    print("you hit it")
+                    shot.kill()
+                    asteroid.kill()
 
          
         dt = clock.tick(60) / 1000 

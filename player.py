@@ -6,12 +6,13 @@ from shot import *
 class Player(CircleShape):
     
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, shots_group):
         self.x = x
         self.y = y
         super().__init__(self.x, self.y, PLAYER_RADIUS)
         self.rotation = 0
         self.shot_timer = 0
+        self.shots_group = shots_group
         
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -56,6 +57,7 @@ class Player(CircleShape):
             shot.velocity *= PLAYER_SHOOT_SPEED
             self.position += (self.velocity * dt)
             self.shot_timer = PLAYER_SHOOT_COOLDOWN
+            self.shots_group.add(shot)
         else:
             print(f"Shots on cooldown! Try again in {self.shot_timer} seconds")
         
