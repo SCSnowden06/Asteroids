@@ -46,7 +46,7 @@ def main():
                 if(CircleShape.is_colliding(shot, asteroid)):
                     print("you hit it")
                     shot.kill()
-                    asteroid.kill()
+                    asteroid.split()
 
          
         dt = clock.tick(60) / 1000 
