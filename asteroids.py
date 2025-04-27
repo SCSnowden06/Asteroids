@@ -11,6 +11,10 @@ class Asteroid(CircleShape):
         self.y = y
         self.radius = radius
 
+        if hasattr(self, 'containers'):
+            for group in self.containers:
+                group.add(self)
+
     def draw(self, screen):
         return pygame.draw.circle(
             screen, (122, 128, 144), self.position, self.radius, 2
@@ -26,5 +30,6 @@ class Asteroid(CircleShape):
         if self.radius <= ASTEROID_MIN_RADIUS:
             return
         else:
-            asteroid = Asteroid(self.x, self.y, (self.radius - ASTEROID_MIN_RADIUS))
-            asteroid.velocity.rotate(random.uniform(20, 50))
+            for _ in range(2):  # spawn two smaller ones
+                asteroid = Asteroid(self.x, self.y, self.radius - ASTEROID_MIN_RADIUS)
+                asteroid.velocity = self.velocity.rotate(random.uniform(-30, 30)) * 1.2
