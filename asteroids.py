@@ -11,7 +11,7 @@ class Asteroid(CircleShape):
         self.y = y
         self.radius = radius
 
-        if hasattr(self, 'containers'):
+        if hasattr(self, "containers"):
             for group in self.containers:
                 group.add(self)
 
